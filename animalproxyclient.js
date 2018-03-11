@@ -18,10 +18,10 @@ socket.on('error', function(err){
     console.log(`Error: ${err}`);
     process.exit(1);
 });
-socket.on('search', function(data, cb){
-    console.log("search query:", data.query);
+socket.on('action', function(data, cb){
+    console.log("action query:", data.query);
     request.get({
-        url: "http://home.xpeg.org:8081/search",
+        url: "http://localhost:8081/action",
         qs: {
             q: data.query
         },
@@ -32,13 +32,7 @@ socket.on('search', function(data, cb){
         } else if (res.statusCode !== 200) {
           console.log('Status:', res.statusCode);
         } else {
-          // data is already parsed as JSON:
-          console.log(data);
-          if (data.length == 0) {
-              cb("すみません、その質問の答えはわかりません。")
-          } else {
-            cb("その答えはズバリ！" + data[0][0]);
-          }
+          cb(data['textToSpeech']);
         }
     });
 });
