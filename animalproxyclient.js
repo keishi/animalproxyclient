@@ -12,7 +12,7 @@ const argv = require('yargs')
             type: 'string'
         }).positional('port', {
             describe: 'the port number to forward the requests to',
-            port: 8081,
+            default: 8081,
             type: 'number'
         });
     }).argv;
