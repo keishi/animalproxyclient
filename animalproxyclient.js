@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+"use strict";
+
 const request = require('request');
 const process = require('process');
 
