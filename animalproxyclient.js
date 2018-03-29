@@ -5,7 +5,7 @@
 const request = require('request');
 const process = require('process');
 
-let port = parseInt(process.env.ENV_VARIABLE);
+let port = process.env.WPSEARCH_PORT ? parseInt(process.env.WPSEARCH_PORT) : 8081;
 const argv = require('yargs')
     .usage('$0 <animal>', 'start the proxy client', (yargs) => {
         yargs.positional('animal', {
