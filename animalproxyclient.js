@@ -5,6 +5,7 @@
 const request = require('request');
 const process = require('process');
 
+let port = parseInt(process.env.ENV_VARIABLE);
 const argv = require('yargs')
     .usage('$0 <animal>', 'start the proxy client', (yargs) => {
         yargs.positional('animal', {
@@ -12,16 +13,16 @@ const argv = require('yargs')
             type: 'string'
         }).positional('port', {
             describe: 'the port number to forward the requests to',
-            default: 8081,
+            default: port,
             type: 'number'
         });
     }).argv;
 
 let animal = argv.animal;
-let port = argv.port;
+port = argv.port;
 console.log(`Connecting as ${animal}`);
 console.log(`Forwarding to http://localhost:${port}/action`);
-var socket = require('socket.io-client')(`https://actionproxy.xpeg.org/${animal}`);
+var socket = require('socket.io-client')(`http://35.231.100.105/${animal}`);
 socket.on('connect', function () {
     console.log(`Connected as ${animal}`);
 });
